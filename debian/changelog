@@ -1,0 +1,60 @@
+shunit2 (2.1.6-1.2) unstable; urgency=medium
+
+  * Non maintainer upload by the Reproducible Builds team.
+  * No source change upload to rebuild on buildd with .buildinfo files.
+
+ -- Holger Levsen <holger@debian.org>  Tue, 29 Dec 2020 01:13:45 +0100
+
+shunit2 (2.1.6-1.1) unstable; urgency=medium
+
+  * Non-maintainer upload.
+  * Switch Build-Depends from pdksh to mksh.  (Closes: #792110)
+  * Drop obsolete DMUA flag.
+
+ -- Andreas Beckmann <anbe@debian.org>  Sat, 12 Sep 2015 23:03:56 +0200
+
+shunit2 (2.1.6-1) unstable; urgency=low
+
+  * New upstream version.
+  * Bump standards version.
+  * Replace shunit2 wrapper with upstream script. (Closes: #601956)
+  * Add DM-Upload-Allowed to source package.
+
+ -- Ulrich Dangel <mru@spamt.net>  Sun, 25 Mar 2012 12:09:23 +0200
+
+shunit2 (2.1.5-3) unstable; urgency=low
+
+  * Support zsh in shunit2 wrapper.
+
+ -- Ulrich Dangel <mru@spamt.net>  Sun, 01 Aug 2010 02:04:26 +0200
+
+shunit2 (2.1.5-2) unstable; urgency=low
+
+  * Install a wrapper for shunit2 in /usr/bin
+  * Include shunit2 examples. (Closes: #588629)
+  * Updated copyright.
+
+ -- Ulrich Dangel <mru@spamt.net>  Thu, 29 Jul 2010 23:12:44 +0200
+
+shunit2 (2.1.5-1) unstable; urgency=low
+
+  * Overtook package, changed Maintainer field.
+  * Do not use upstream make file as upstream already deleted it.
+  * Updated watch file.
+  * Initial release. (Closes: #559388)
+
+ -- Ulrich Dangel <mru@spamt.net>  Fri, 04 Dec 2009 00:05:33 +0100
+
+shunit2 (2.1.2-1.1) unstable; urgency=high
+
+  * Non-maintainer upload.
+  * Use CURDIR instead of PWD in top level Makefile. (Closes: #472111)
+  * Set Architecture: all. (Closes: #473749)
+
+ -- Christoph Berg <myon@debian.org>  Tue, 01 Apr 2008 14:20:07 +0200
+
+shunit2 (2.1.2-1) unstable; urgency=low
+
+  * Initial release (Closes: #456140)
+
+ -- Cai Qian <caiqian@debian.org>  Sat, 09 Feb 2008 02:42:04 -0500

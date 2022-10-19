@@ -1,0 +1,17 @@
+Source: shunit2
+Section: devel
+Priority: optional
+Maintainer: Ulrich Dangel <mru@spamt.net>
+Build-Depends: debhelper (>= 9)
+Build-Depends-Indep: asciidoc, docbook-xsl, mksh, xsltproc, zsh
+Standards-Version: 3.9.3
+Homepage: http://code.google.com/p/shunit2/
+
+Package: shunit2
+Architecture: all
+Depends: ${misc:Depends}
+Description: unit test framework for Bourne based shell scripts
+ shUnit2 was originally developed to provide a consistent testing
+ solution for log4sh, a shell based logging framework similar to
+ log4j. It is designed to work in a similar manner to JUnit, PyUnit,
+ etc.
