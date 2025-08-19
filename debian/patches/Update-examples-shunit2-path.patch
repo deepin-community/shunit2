@@ -1,0 +1,97 @@
+From: William Desportes <williamdes@wdes.fr>
+Date: Wed, 21 Dec 2022 20:11:21 +0400
+Subject: Update examples shunit2 path
+
+Origin: vendor
+Forwarded: not-needed
+---
+ examples/equality_test.sh  | 2 +-
+ examples/lineno_test.sh    | 2 +-
+ examples/math_test.sh      | 4 ++--
+ examples/mkdir_test.sh     | 2 +-
+ examples/mock_file_test.sh | 4 ++--
+ examples/party_test.sh     | 2 +-
+ examples/suite_test.sh     | 2 +-
+ 7 files changed, 9 insertions(+), 9 deletions(-)
+
+diff --git a/examples/equality_test.sh b/examples/equality_test.sh
+index 7b56640..6c3e80d 100755
+--- a/examples/equality_test.sh
++++ b/examples/equality_test.sh
+@@ -6,4 +6,4 @@ testEquality() {
+ }
+ 
+ # Load and run shUnit2.
+-. ../shunit2
++. shunit2
+diff --git a/examples/lineno_test.sh b/examples/lineno_test.sh
+index 11ddfc8..fdc9a75 100755
+--- a/examples/lineno_test.sh
++++ b/examples/lineno_test.sh
+@@ -12,4 +12,4 @@ testLineNo() {
+ }
+ 
+ # Load and run shUnit2.
+-. ../shunit2
++. shunit2
+diff --git a/examples/math_test.sh b/examples/math_test.sh
+index c6d0029..56a0f78 100755
+--- a/examples/math_test.sh
++++ b/examples/math_test.sh
+@@ -18,8 +18,8 @@ testAdding() {
+ 
+ oneTimeSetUp() {
+   # Load include to test.
+-  . ./math.inc
++  . ./examples/math.inc
+ }
+ 
+ # Load and run shUnit2.
+-. ../shunit2
++. shunit2
+diff --git a/examples/mkdir_test.sh b/examples/mkdir_test.sh
+index a608e3a..93875a5 100755
+--- a/examples/mkdir_test.sh
++++ b/examples/mkdir_test.sh
+@@ -76,4 +76,4 @@ tearDown() {
+ 
+ # Load and run shUnit2.
+ [ -n "${ZSH_VERSION:-}" ] && SHUNIT_PARENT=$0
+-. ../shunit2
++. shunit2
+diff --git a/examples/mock_file_test.sh b/examples/mock_file_test.sh
+index 1da8dd2..0a00010 100755
+--- a/examples/mock_file_test.sh
++++ b/examples/mock_file_test.sh
+@@ -25,9 +25,9 @@ daemon:*:1:1:System Services:/var/root:/usr/bin/false
+ EOF
+ 
+   # Load script under test.
+-  . './mock_file.sh'
++  . './examples/mock_file.sh'
+ }
+ 
+ # Load and run shUnit2.
+ [ -n "${ZSH_VERSION:-}" ] && SHUNIT_PARENT=$0
+-. ../shunit2
++. shunit2
+diff --git a/examples/party_test.sh b/examples/party_test.sh
+index 41bd124..204b5b1 100755
+--- a/examples/party_test.sh
++++ b/examples/party_test.sh
+@@ -13,4 +13,4 @@ testPartyLikeItIs1999() {
+ }
+ 
+ # Load and run shUnit2.
+-. ../shunit2
++. shunit2
+diff --git a/examples/suite_test.sh b/examples/suite_test.sh
+index 278c3a0..1a56b65 100755
+--- a/examples/suite_test.sh
++++ b/examples/suite_test.sh
+@@ -29,4 +29,4 @@ suite_test_two() {
+ }
+ 
+ # Load and run shUnit2.
+-. ../shunit2
++. shunit2

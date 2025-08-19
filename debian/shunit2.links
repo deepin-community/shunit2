@@ -1,1 +1,6 @@
-/usr/bin/shunit2 /usr/share/shunit2/shunit2
+# This symlink is added for the backward compatibility.
+/usr/share/shunit2/shunit2 /usr/bin/shunit2
+# This link is added to match the typical Debian package practice without
+# changing names of upstream files to avoid mismatched filename references in
+# documentation.
+/usr/share/doc/shunit2/CHANGES-2.1.md.gz /usr/share/doc/shunit2/changelog.gz

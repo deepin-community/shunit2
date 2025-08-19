@@ -1,0 +1,135 @@
+.TH shunit2 1 2020-03-29 "shunit2 2.1.8"
+.SH Name
+.B shunit2
+\-
+unit test framework for shell scripts
+.SH Synopsis
+.B shunit2
+.I unit-file
+.SH Description
+.I shUnit2
+is an
+.IR x Unit
+unit test framework for Bourne-based shell scripts, and is designed to
+work in a similar manner to
+.IR JUnit ,
+.IR PyUnit ,
+and so forth.
+If you have ever had the desire to write a unit test for a shell script,
+.I shUnit2
+can do the job.
+.PP
+You can either run
+.B shunit2
+directly from the command line and specify the unit file
+.I unit-file
+or directly source the
+.B shunit2
+executable.
+.PP
+If you directly execute
+.B shunit2
+and
+.I don't
+specify
+.IR unit-file ,
+.I shUnit2
+assumes an empty test file and will return without an error message.
+.SH Options
+.B shunit2
+does not support any command-line options at all.
+You can either source
+.B shunit2
+with the shell's
+.B .\&
+(\[lq]dot\[rq]) built-in to execute your unit tests or directly run
+.B shunit2
+as a command with
+.I unit-file
+as a parameter.
+.SH Example
+The following simple script tests whether 1 equals 1.
+.RS
+.EX
+.B #! /bin/sh
+.B testEquality()
+.B {
+.B \ \ assertEquals 1 1
+.B }
+.PP
+.B # load shunit2
+.B . shunit2
+.EE
+.RE
+.PP
+The above example assumes this is executed on the machine where
+.B shunit2
+is available as an executable command found in the path specified by the
+environment variable
+.BR $PATH .
+You can alternatively copy a
+.B /usr/bin/shunit2
+file from this machine to
+.B path/to/shunit2
+in the target source tree and use it in the target build
+environment as follows.
+.RS
+.EX
+.B #! /bin/sh
+.B testEquality()
+.B {
+.B \ \ assertEquals 1 1
+.B }
+.PP
+.B # load shunit2
+.B . path/to/shunit2
+.EE
+.RE
+.PP
+The following is a shell session transcript showing how to write the
+same test as above and execute it directly.
+.RS
+.EX
+$ \c
+.B cat > test_equality.sh <<EOF
+.B testEquality()
+.B {
+.B \ \ assertEquals 1 1
+.B }
+.B EOF
+$ \c
+.B shunit2 test_equality.sh
+.EE
+.RE
+Note that
+.B shunit2
+is
+.I not
+sourced in this example.
+.PP
+More sophisticated examples can be found in
+.UR file:///usr/share/doc/shunit2/examples/
+.UE .
+.SH Authors
+.I shUnit2
+was written by
+.MT kate.ward@forestent.com
+Kate Ward
+.ME .
+This man page was originally written by
+.MT mru@spamt.net
+Ulrich Dangel
+.ME .
+.SH See also
+For more information, see
+.UR https://github.com/kward/shunit2/
+the shUnit2 GitHub project
+.UE ,
+or have a look at the
+.UR file:///usr/share/doc/shunit2/
+installed documentation
+.UE .
+.\" Local Variables:
+.\" mode: nroff
+.\" End:
+.\" vim:set filetype=nroff:

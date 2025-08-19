@@ -8,8 +8,5 @@ Abstract: shUnit2 Documentation
 Section: Programming
 
 Format: text
-Files: /usr/share/doc/shunit2/shunit2.txt.gz
+Files: /usr/share/doc/shunit2/README.md.gz
 
-Format: HTML
-Index: /usr/share/doc/shunit2/shunit2.html
-Files: /usr/share/doc/shunit2/shunit2.html

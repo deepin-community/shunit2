@@ -1,0 +1,10 @@
+#!/bin/sh
+
+set -eu
+
+test_foobar () {
+    assertEquals "foo" "foo"
+    assertEquals "bar" "bar"
+}
+
+. shunit2

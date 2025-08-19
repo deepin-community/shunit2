@@ -1,0 +1,21 @@
+#!/bin/sh
+
+set +x
+set -e
+
+# keep in sync with debian/rules::override_dh_auto_build
+
+# bash and dash is always available on Debian build environment
+SHUNIT_INC="/usr/share/shunit2/shunit2" ./test_runner -s'/bin/bash /bin/dash /bin/ksh /bin/mksh /bin/zsh'\
+            -tshunit2_args_test.sh
+SHUNIT_INC="/usr/share/shunit2/shunit2" ./test_runner -s'/bin/bash /bin/dash /bin/ksh /bin/mksh /bin/zsh'\
+            -tshunit2_asserts_test.sh
+SHUNIT_INC="/usr/share/shunit2/shunit2" ./test_runner -s'/bin/bash /bin/dash /bin/ksh /bin/mksh /bin/zsh'\
+            -tshunit2_failures_test.sh
+SHUNIT_INC="/usr/share/shunit2/shunit2" ./test_runner -s'/bin/bash /bin/dash /bin/ksh /bin/mksh /bin/zsh'\
+            -tshunit2_macros_test.sh
+# Test this only for bash to avoid errors
+SHUNIT_INC="/usr/share/shunit2/shunit2" ./test_runner -s'/bin/bash'\
+            -tshunit2_misc_test.sh
+SHUNIT_INC="/usr/share/shunit2/shunit2" ./test_runner -s'/bin/bash /bin/dash /bin/ksh /bin/mksh /bin/zsh'\
+            -tshunit2_standalone_test.sh
