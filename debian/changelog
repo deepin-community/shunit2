@@ -1,9 +1,86 @@
-shunit2 (2.1.6-1.2) unstable; urgency=medium
+shunit2 (2.1.8-4) unstable; urgency=medium
 
-  * Non maintainer upload by the Reproducible Builds team.
-  * No source change upload to rebuild on buildd with .buildinfo files.
+  [ Debian Janitor ]
+  * Apply multi-arch hints, Add Multi-Arch: foreign. (Closes: #1057034)
 
- -- Holger Levsen <holger@debian.org>  Tue, 29 Dec 2020 01:13:45 +0100
+  [ William Desportes ]
+  * Mark the simple test as "Restrictions: superficial" (DEP-8).
+  * Add "<!nocheck>" for Build-Depends-Indep
+  * Add a patch to update example paths
+  * Add more superficial tests using examples
+  * Add DEP-8 test names to all tests
+  * Add examples/* to d/docs
+  * Add patches for upstream issues #37 and #129
+  * Update Standards-Version to 4.6.2
+
+ -- William Desportes <williamdes@wdes.fr>  Wed, 06 Dec 2023 20:34:49 +0100
+
+shunit2 (2.1.8-3) unstable; urgency=medium
+
+  * Add a superficial DEP-8 autopkgtest that depends on nothing.
+  * Add a patch to fix issue with tput.
+
+ -- William Desportes <williamdes@wdes.fr>  Mon, 28 Nov 2022 19:08:00 +0100
+
+shunit2 (2.1.8-2) unstable; urgency=medium
+
+  * Upload to unstable. \o/
+  * Add autopkgtests.
+  * Document all needed shells.
+
+ -- William Desportes <williamdes@wdes.fr>  Thu, 24 Nov 2022 11:31:41 +0200
+
+shunit2 (2.1.8-1) experimental; urgency=medium
+
+  [ William Desportes ]
+  * New upstream version 2.1.8 (Closes: #1006185)
+  * Add a GitLab Salsa Debian CI file
+  * Adopt this package
+  * Set debian branch to debian/latest (DEP-14)
+  * Set debhelper-compat to 13
+  * Improve Vcs-* links
+  * Fix d/watch (Closes: #887842)
+  * Improve and fix d/copyright format
+  * Apply "wrap-and-sort"
+  * Bump Standards-Version to 4.6.1
+  * Add a patch for dash tests to handle negative line numbers
+  * Add a patch to skip test for issue 84
+  * Add "Rules-Requires-Root: no" on d/control
+  * Update version and date of d/shunit2.1
+  * Update d/copyright
+
+  [ G. Branden Robinson ]
+  * debian/control: Note movement of upstream to a new site (Google Code
+    to GitHub).
+  * debian/shunit2.man: Rewrite in groff.
+    + debian/shunit2.1.txt: Delete.
+    + debian/control: Drop build dependencies on asciidoc, docbook-xsl,
+      and xsltproc.
+    + debian/rules: Remove generation and cleanup of man page.
+    + debian/shunit2.manpages: Update file reference.
+  * debian/control: Make style fixes to description.
+    + Use hyphens in adjectival phrases.
+    + Wrap at 80 columns.
+    + Use monospaced-font-friendly inter-sentence spacing.
+    + Recast sentence to not end in "etc." and also add information.
+
+  [ Osamu Aoki ]
+  * Packaged new upstream 2.1.8pre pre-release with completely
+    refreshed packaging structure to cope with the recent upstream
+    file organization and consideration to the backward
+    compatibility and RPM compatibility. (Closes: #887842)
+  * Updated license to match upstream: LGPL2.1+ -> Apache 2.0
+  * debian/control: Bump Standards-Version to 4.4.1 and
+    wrap-and-sort
+  * debian/rules: Clean-up and test against dash, bash, ksh, mksh,
+    and zsh.  shunit2_misc_test.sh is only tested for bash.
+  * Manpage updated based on Branden's groff version with
+    additional content by me.  Since the main contents are
+    apparently copied from upstream documentation, this is also
+    changed to Apache 2.0 License. (Closes: #861618)
+  * Set up salsa.debian.org repository (dgit-maint-merge approach)
+
+ -- William Desportes <williamdes@wdes.fr>  Fri, 12 Aug 2022 11:19:10 +0200
 
 shunit2 (2.1.6-1.1) unstable; urgency=medium
 

@@ -1,23 +1,22 @@
 #!/usr/bin/make -f
 # -*- makefile -*-
 
-UPSTREAM_VERSION=$(shell dpkg-parsechangelog | sed -rne 's,^Version: ([^-]+).*,\1,p')
-
 %:
 	dh $@
 
-override_dh_auto_build-indep:
-	cp -r examples examples.debian
-	a2x -a revnumber=$(UPSTREAM_VERSION) -L -fmanpage debian/shunit2.1.txt
-	find examples.debian -type f -print0 | xargs -0r sed -i -e "s#../src/##g"
-
-override_dh_installchangelogs:
-	dh_installchangelogs doc/RELEASE_NOTES-$(UPSTREAM_VERSION).txt
-
 override_dh_auto_test:
-	cd src && ./shunit2_test.sh
-
-override_dh_clean:
-	rm -f debian/shunit2.1 debian/shunit2.1.xml
-	rm -rf examples.debian
-	dh_clean
+	# keep in sync with debian/tests/run-tests
+	# bash and dash is always available on Debian build environment
+	./test_runner -s'/bin/bash /bin/dash /bin/ksh /bin/mksh /bin/zsh'\
+		      -tshunit2_args_test.sh
+	./test_runner -s'/bin/bash /bin/dash /bin/ksh /bin/mksh /bin/zsh'\
+		      -tshunit2_asserts_test.sh
+	./test_runner -s'/bin/bash /bin/dash /bin/ksh /bin/mksh /bin/zsh'\
+		      -tshunit2_failures_test.sh
+	./test_runner -s'/bin/bash /bin/dash /bin/ksh /bin/mksh /bin/zsh'\
+		      -tshunit2_macros_test.sh
+	# Test this only for bash to avoid errors
+	./test_runner -s'/bin/bash'\
+		      -tshunit2_misc_test.sh
+	./test_runner -s'/bin/bash /bin/dash /bin/ksh /bin/mksh /bin/zsh'\
+		      -tshunit2_standalone_test.sh

@@ -1,0 +1,41 @@
+Tests: run-tests
+Depends: dash, ksh, mksh, zsh, @
+
+Tests: simple-script-tests
+Depends: @
+Restrictions: superficial
+
+Test-Command: examples/equality_test.sh
+Features: test-name=equality_test
+Depends: @
+Restrictions: superficial
+
+Test-Command: examples/lineno_test.sh || if [ $? -eq 1 ]; then exit 0; else exit 1; fi
+Features: test-name=lineno_test
+Depends: @
+Restrictions: superficial, allow-stderr
+
+Test-Command: examples/math_test.sh
+Features: test-name=math_test
+Depends: @
+Restrictions: superficial
+
+Test-Command: examples/mkdir_test.sh
+Features: test-name=mkdir_test
+Depends: @
+Restrictions: superficial
+
+Test-Command: examples/mock_file_test.sh
+Features: test-name=mock_file_test
+Depends: @
+Restrictions: superficial
+
+Test-Command: examples/party_test.sh || if [ $? -eq 1 ]; then exit 0; else exit 1; fi
+Features: test-name=party_test
+Depends: @
+Restrictions: superficial, allow-stderr
+
+Test-Command: examples/suite_test.sh
+Features: test-name=suite_test
+Depends: @
+Restrictions: superficial

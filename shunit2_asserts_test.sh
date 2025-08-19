@@ -1,23 +1,25 @@
 #! /bin/sh
-# $Id: shunit2_test_asserts.sh 312 2011-03-14 22:41:29Z kate.ward@forestent.com $
 # vim:et:ft=sh:sts=2:sw=2
 #
-# Copyright 2008 Kate Ward. All Rights Reserved.
-# Released under the LGPL (GNU Lesser General Public License)
+# shunit2 unit test for assert functions.
+#
+# Copyright 2008-2017 Kate Ward. All Rights Reserved.
+# Released under the Apache 2.0 license.
 #
 # Author: kate.ward@forestent.com (Kate Ward)
+# https://github.com/kward/shunit2
 #
-# shUnit2 unit test for assert functions
+# Disable source following.
+#   shellcheck disable=SC1090,SC1091
 
-# load test helpers
+# These variables will be overridden by the test helpers.
+stdoutF="${TMPDIR:-/tmp}/STDOUT"
+stderrF="${TMPDIR:-/tmp}/STDERR"
+
+# Load test helpers.
 . ./shunit2_test_helpers
 
-#------------------------------------------------------------------------------
-# suite tests
-#
-
-commonEqualsSame()
-{
+commonEqualsSame() {
   fn=$1
 
   ( ${fn} 'x' 'x' >"${stdoutF}" 2>"${stderrF}" )
@@ -42,8 +44,7 @@ commonEqualsSame()
   th_assertFalseWithError 'too many arguments' $? "${stdoutF}" "${stderrF}"
 }
 
-commonNotEqualsSame()
-{
+commonNotEqualsSame() {
   fn=$1
 
   ( ${fn} 'x' 'y' >"${stdoutF}" 2>"${stderrF}" )
@@ -65,28 +66,84 @@ commonNotEqualsSame()
   th_assertFalseWithError 'too many arguments' $? "${stdoutF}" "${stderrF}"
 }
 
-testAssertEquals()
-{
+testAssertEquals() {
   commonEqualsSame 'assertEquals'
 }
 
-testAssertNotEquals()
-{
+testAssertNotEquals() {
   commonNotEqualsSame 'assertNotEquals'
 }
 
-testAssertSame()
-{
+testAssertSame() {
   commonEqualsSame 'assertSame'
 }
 
-testAssertNotSame()
-{
+testAssertNotSame() {
   commonNotEqualsSame 'assertNotSame'
 }
 
-testAssertNull()
-{
+testAssertContains() {
+  ( assertContains 'abcdef' 'abc' >"${stdoutF}" 2>"${stderrF}" )
+  th_assertTrueWithNoOutput 'found' $? "${stdoutF}" "${stderrF}"
+
+  ( assertContains 'abcdef' 'bcd' >"${stdoutF}" 2>"${stderrF}" )
+  th_assertTrueWithNoOutput 'found' $? "${stdoutF}" "${stderrF}"
+
+  ( assertContains 'abcdef' 'def' >"${stdoutF}" 2>"${stderrF}" )
+  th_assertTrueWithNoOutput 'found' $? "${stdoutF}" "${stderrF}"
+
+  ( assertContains 'abc -Xabc def' '-Xabc' >"${stdoutF}" 2>"${stderrF}" )
+  th_assertTrueWithNoOutput 'content starts with "-"' $? "${stdoutF}" "${stderrF}"
+
+  ( assertContains "${MSG}" 'abcdef' 'abc' >"${stdoutF}" 2>"${stderrF}" )
+  th_assertTrueWithNoOutput 'found, with msg' $? "${stdoutF}" "${stderrF}"
+
+  ( assertContains 'abcdef' 'xyz' >"${stdoutF}" 2>"${stderrF}" )
+  th_assertFalseWithOutput 'not found' $? "${stdoutF}" "${stderrF}"
+
+  ( assertContains 'abcdef' 'zab' >"${stdoutF}" 2>"${stderrF}" )
+  th_assertFalseWithOutput 'not found' $? "${stdoutF}" "${stderrF}"
+
+  ( assertContains 'abcdef' 'efg' >"${stdoutF}" 2>"${stderrF}" )
+  th_assertFalseWithOutput 'not found' $? "${stdoutF}" "${stderrF}"
+
+  ( assertContains 'abcdef' 'acf' >"${stdoutF}" 2>"${stderrF}" )
+  th_assertFalseWithOutput 'not found' $? "${stdoutF}" "${stderrF}"
+
+  ( assertContains 'abcdef' >"${stdoutF}" 2>"${stderrF}" )
+  th_assertFalseWithError 'too few arguments' $? "${stdoutF}" "${stderrF}"
+
+  ( assertContains arg1 arg2 arg3 arg4 >"${stdoutF}" 2>"${stderrF}" )
+  th_assertFalseWithError 'too many arguments' $? "${stdoutF}" "${stderrF}"
+}
+
+testAssertNotContains() {
+  ( assertNotContains 'abcdef' 'xyz' >"${stdoutF}" 2>"${stderrF}" )
+  th_assertTrueWithNoOutput 'not found' $? "${stdoutF}" "${stderrF}"
+
+  ( assertNotContains 'abcdef' 'zab' >"${stdoutF}" 2>"${stderrF}" )
+  th_assertTrueWithNoOutput 'not found' $? "${stdoutF}" "${stderrF}"
+
+  ( assertNotContains 'abcdef' 'efg' >"${stdoutF}" 2>"${stderrF}" )
+  th_assertTrueWithNoOutput 'not found' $? "${stdoutF}" "${stderrF}"
+
+  ( assertNotContains 'abcdef' 'acf' >"${stdoutF}" 2>"${stderrF}" )
+  th_assertTrueWithNoOutput 'not found' $? "${stdoutF}" "${stderrF}"
+
+  ( assertNotContains "${MSG}" 'abcdef' 'xyz' >"${stdoutF}" 2>"${stderrF}" )
+  th_assertTrueWithNoOutput 'not found, with msg' $? "${stdoutF}" "${stderrF}"
+
+  ( assertNotContains 'abcdef' 'abc' >"${stdoutF}" 2>"${stderrF}" )
+  th_assertFalseWithOutput 'found' $? "${stdoutF}" "${stderrF}"
+
+  ( assertNotContains 'abcdef' >"${stdoutF}" 2>"${stderrF}" )
+  th_assertFalseWithError 'too few arguments' $? "${stdoutF}" "${stderrF}"
+
+  ( assertNotContains arg1 arg2 arg3 arg4 >"${stdoutF}" 2>"${stderrF}" )
+  th_assertFalseWithError 'too many arguments' $? "${stdoutF}" "${stderrF}"
+}
+
+testAssertNull() {
   ( assertNull '' >"${stdoutF}" 2>"${stderrF}" )
   th_assertTrueWithNoOutput 'null' $? "${stdoutF}" "${stderrF}"
 
@@ -119,6 +176,7 @@ testAssertNotNull()
   th_assertTrueWithNoOutput 'not null, with single-quote' $? \
       "${stdoutF}" "${stderrF}"
 
+  # shellcheck disable=SC2016
   ( assertNotNull 'x$b' >"${stdoutF}" 2>"${stderrF}" )
   th_assertTrueWithNoOutput 'not null, with dollar' $? \
       "${stdoutF}" "${stderrF}"
@@ -130,14 +188,13 @@ testAssertNotNull()
   ( assertNotNull '' >"${stdoutF}" 2>"${stderrF}" )
   th_assertFalseWithOutput 'null' $? "${stdoutF}" "${stderrF}"
 
-  # there is no test for too few arguments as $1 might actually be null
+  # There is no test for too few arguments as $1 might actually be null.
 
   ( assertNotNull arg1 arg2 arg3 >"${stdoutF}" 2>"${stderrF}" )
   th_assertFalseWithError 'too many arguments' $? "${stdoutF}" "${stderrF}"
 }
 
-testAssertTrue()
-{
+testAssertTrue() {
   ( assertTrue 0 >"${stdoutF}" 2>"${stderrF}" )
   th_assertTrueWithNoOutput 'true' $? "${stdoutF}" "${stderrF}"
 
@@ -163,8 +220,7 @@ testAssertTrue()
   th_assertFalseWithError 'too many arguments' $? "${stdoutF}" "${stderrF}"
 }
 
-testAssertFalse()
-{
+testAssertFalse() {
   ( assertFalse 1 >"${stdoutF}" 2>"${stderrF}" )
   th_assertTrueWithNoOutput 'false' $? "${stdoutF}" "${stderrF}"
 
@@ -190,20 +246,13 @@ testAssertFalse()
   th_assertFalseWithError 'too many arguments' $? "${stdoutF}" "${stderrF}"
 }
 
-#------------------------------------------------------------------------------
-# suite functions
-#
-
-oneTimeSetUp()
-{
-  tmpDir="${__shunit_tmpDir}/output"
-  mkdir "${tmpDir}"
-  stdoutF="${tmpDir}/stdout"
-  stderrF="${tmpDir}/stderr"
+oneTimeSetUp() {
+  th_oneTimeSetUp
 
   MSG='This is a test message'
 }
 
-# load and run shUnit2
+# Load and run shunit2.
+# shellcheck disable=SC2034
 [ -n "${ZSH_VERSION:-}" ] && SHUNIT_PARENT=$0
-. ${TH_SHUNIT}
+. "${TH_SHUNIT}"

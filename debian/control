@@ -1,14 +1,21 @@
 Source: shunit2
+Maintainer: William Desportes <williamdes@wdes.fr>
 Section: devel
 Priority: optional
-Maintainer: Ulrich Dangel <mru@spamt.net>
-Build-Depends: debhelper (>= 9)
-Build-Depends-Indep: asciidoc, docbook-xsl, mksh, xsltproc, zsh
-Standards-Version: 3.9.3
-Homepage: http://code.google.com/p/shunit2/
+Build-Depends: debhelper-compat (= 13)
+Build-Depends-Indep: dash <!nocheck>,
+                     ksh <!nocheck>,
+                     mksh <!nocheck>,
+                     zsh <!nocheck>
+Standards-Version: 4.6.2
+Vcs-Browser: https://salsa.debian.org/debian/shunit2
+Vcs-Git: https://salsa.debian.org/debian/shunit2.git -b debian/latest
+Homepage: https://github.com/kward/shunit2
+Rules-Requires-Root: no
 
 Package: shunit2
 Architecture: all
+Multi-Arch: foreign
 Depends: ${misc:Depends}
 Description: unit test framework for Bourne based shell scripts
  shUnit2 was originally developed to provide a consistent testing

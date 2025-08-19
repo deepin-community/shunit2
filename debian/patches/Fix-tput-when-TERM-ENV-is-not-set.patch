@@ -1,0 +1,27 @@
+From: William Desportes <williamdes@wdes.fr>
+Date: Mon, 28 Nov 2022 15:42:19 +0100
+Subject: Fix error with tput when $TERM is not set
+
+Origin: vendor
+Forwarded: https://github.com/kward/shunit2/issues/134
+---
+ shunit2 | 6 ++++++
+ 1 file changed, 6 insertions(+)
+
+diff --git a/shunit2 b/shunit2
+index 6239683..b9b4603 100755
+--- a/shunit2
++++ b/shunit2
+@@ -1027,6 +1027,12 @@ _shunit_configureColor() {
+ 
+ # colors returns the number of supported colors for the TERM.
+ _shunit_colors() {
++  # Avoid: tput: No value for $TERM and no -T specified
++  if command [ -z "${TERM:-}" ]; then
++    echo 16
++    return
++  fi
++
+   _shunit_tput_=`${SHUNIT_CMD_TPUT} colors 2>/dev/null`
+   if command [ $? -eq 0 ]; then
+     echo "${_shunit_tput_}"

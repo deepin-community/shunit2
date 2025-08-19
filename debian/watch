@@ -1,2 +1,6 @@
-version=3
-http://googlecode.debian.net/p/shunit2/shunit2-([\d\.]*)\.tgz
+# Compulsory line, this is a version 4 file
+version=4
+
+# GitHub hosted projects
+opts="filenamemangle=s/.+\/v(\d\S+)\.tar\.gz/shunit2-v$1\.tar\.gz/" \
+  https://github.com/kward/shunit2/tags .*/v(\d\S+)\.tar\.gz

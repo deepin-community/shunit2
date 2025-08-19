@@ -1,1 +1,3 @@
-src/shunit2 usr/bin
+# These are installed here to match typical rpm-packages
+shunit2 usr/share/shunit2
+shunit2_test_helpers usr/share/shunit2

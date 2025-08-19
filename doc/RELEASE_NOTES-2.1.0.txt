@@ -100,5 +100,5 @@ Known Bugs and Issues
 None.
 
 
-.. $Revision: 273 $
+.. $Revision$
 .. vim:fileencoding=latin1:spell:syntax=rst:textwidth=80
